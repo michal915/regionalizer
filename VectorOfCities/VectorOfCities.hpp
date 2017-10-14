@@ -22,12 +22,17 @@
 //#include <utility>
 //#include <type_traits>
 #include "City.hpp"
+#include "GnuplotHandler.hpp"
 
 namespace VectorOfCities {
 
 void setDistanceToTheFarthestInTheWholeVector(std::vector<City>& vec);
 std::size_t getPopulationOfTheWholeVector(const std::vector<City>& vec);
-void calculateHappinessLevelForOneRegionByBruteForce(std::vector<City> vec);
+void calculateHappinessLevelForOneRegionByBruteForce
+        (std::vector<City> vec);
+void calculateHappinessLevelForOneRegionByBruteForceAndMakeMap
+        (const std::vector<City>& vec);
+
 }
 
 #endif // VECTOROFCITIES_HPP
