@@ -21,6 +21,8 @@
 
 [![image](https://i.imgur.com/tTPunlN.png)](https://i.imgur.com/tTPunlN.png)
 
+[![image](https://i.imgur.com/PHIxg8n.png)](https://i.imgur.com/PHIxg8n.png)
+
 How could we know what is the best city to locate the headquaters of our company?
  - Should we locate it in the biggest city?
  - ..or in the centre of the state? (so the distance to the farthest city would be as small as possible?)
