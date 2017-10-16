@@ -46,6 +46,8 @@ script:
 
 after_success:
     - cd ${TRAVIS_BUILD_DIR} 
+    - pwd
+    - find -name *.gcda
     - lcov --directory build --capture --output-file coverage.info
     - lcov --remove coverage.info 'test/*' '/usr/*' --output-file coverage.info
     - lcov --list coverage.info
