@@ -119,5 +119,67 @@ void plotPopulation(const std::vector<City>& vec) {
 //    system( "rm -f population.dat" );
 }
 
+void plotPopulationAsAnimatedGIF(const std::vector<City>& vec) {
+    unsigned counter{0};
+for (;counter<vec.size();counter+=(vec.size()/25)) {
+    std::ofstream data;
+    data.open("population.dat");
+
+    auto sortedVec = vec;
+    sort(sortedVec.begin(), sortedVec.end(), [](const City& lhs, 
+            const City& rhs) {
+        return lhs.getPopulation() < rhs.getPopulation();
+    });
+// ugly hack:
+    if (counter+25 > vec.size()) {
+        counter = vec.size();
+    }
+    for (auto it = sortedVec.begin(); it != sortedVec.begin()+counter; ++it) {
+        data << it->getLongitude();
+        data << " ";
+        data << it->getLatitude();
+        data << " ";
+        data << it->getPopulation();
+        data << std::endl;
+    }
+    data.close();
+
+    std::ofstream script;
+    script.open("population.gnu");
+    script << "set terminal pngcairo enhanced font \"arial,10\" fontscale 1.0 size 800, 560";
+    script << std::endl;
+//    script << "set output 'population.png'";
+    script << "set output 'populationFrame" << 
+        (counter < 100 ? "0" : "") <<
+        (counter < 10 ? "0" : "") <<
+        counter <<
+        ".png'";
+    script << std::endl;
+    script << "set key inside left top vertical Right noreverse enhanced autotitles box linetype -1 linewidth 1.000";
+    script << std::endl;
+    script << "set title \"HL\"";
+    script << std::endl;
+    script << "set ylabel \"latitude\"";
+    script << std::endl;
+    script << "set xlabel \"longitude\"";
+    script << std::endl;
+    script << "set xrange [14 : 25] reverse nowriteback";
+    script << std::endl;
+    script << "set yrange [49 : 56] noreverse nowriteback";
+    script << std::endl;
+    script << "plot 'population.dat' with points palette pt 7 ps 1 ";
+    script << std::endl;
+    script << "set output";
+    script << std::endl;
+
+    script.close();
+    system( "gnuplot population.gnu" );
+    system( "rm -f population.gnu" );
+//    system( "rm -f population.dat" );
+    }
+    system( "convert -delay 120 -loop 0 populationFrame*.png animated.gif" );
+//    system( "rm -f populationFrame*.png" );
+}
+
 }
 

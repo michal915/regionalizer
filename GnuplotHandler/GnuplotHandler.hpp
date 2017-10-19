@@ -31,6 +31,7 @@ void saveDummyPlot();
 bool isGnuplotInstalledOnHost();
 void plotHappinessLevelWhenWeHaveOnlyOneRegion(std::vector<City> vec);
 void plotPopulation(const std::vector<City>& vec);
+void plotPopulationAsAnimatedGIF(const std::vector<City>& vec);
 
 }
 

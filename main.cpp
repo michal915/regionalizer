@@ -84,5 +84,13 @@ int main(int argc, char *argv[]) {
     GnuplotHandler::saveDummyPlot();
     GnuplotHandler::plotPopulation(vec);
     GnuplotHandler::plotHappinessLevelWhenWeHaveOnlyOneRegion(vec);
+    if (parser.hasKey("--gif")) {
+	std::cout << "--gif found, so let's make GIF";	
+	std::cout << std::endl;
+        GnuplotHandler::plotPopulationAsAnimatedGIF(vec);
+    } else {
+	std::cout << "No --gif in OPTS";	
+	std::cout << std::endl;
+    }
     return 0;
 }    
